@@ -3,36 +3,33 @@
   <div v-if="hasContent" class="page">
     <div class="home">
       <!-- Button to edit document in dashboard -->
-      <prismic-edit-button :documentId="documentId"/>
-      <div class="blog-avatar" :style="{ backgroundImage: 'url(' + fields.image + ')' }">
-      </div>
+      <prismic-edit-button :documentId="documentId" />
+      <div class="blog-avatar" :style="{ backgroundImage: 'url(' + fields.image + ')' }"></div>
       <!-- Template for page title -->
-      <h1 class="blog-title">
-        {{ $prismic.richTextAsPlain(fields.headline) }}
-      </h1>
+      <h1 class="blog-title">{{ $prismic.richTextAsPlain(fields.headline) }}</h1>
       <!-- Template for page description -->
       <p class="blog-description">{{ $prismic.richTextAsPlain(fields.description) }}</p>
     </div>
     <!-- Vue reference for blog posts component -->
-    <blog-posts/>
+    <blog-posts />
   </div>
   <!-- If no content return message -->
   <div v-else class="home">
-    <p> Please add some content to your blog home document.</p>
+    <p>Please add some content to your blog home document.</p>
   </div>
 </template>
 
 <script>
-import BlogPosts from '../components/BlogPosts.vue'
+import BlogPosts from "../components/BlogPosts.vue";
 
 export default {
-  name: 'blog-home',
+  name: "blog-home",
   components: {
     BlogPosts
   },
-  data () {
+  data() {
     return {
-      documentId: '',
+      documentId: "",
       fields: {
         headline: null,
         description: null,
@@ -41,30 +38,28 @@ export default {
       posts: [],
       linkResolver: this.$prismic.linkResolver,
       hasContent: false
-    }
+    };
   },
   methods: {
-    getContent () {
+    async getContent() {
       //Query to get home content
-      this.$prismic.client.getSingle('blog_home')
-        .then((document) => {
-          if (document) {
-            this.documentId = document.id
-            this.fields.headline = document.data.headline;
-            this.fields.description = document.data.description;
-            this.fields.image = document.data.image.url;
+      await this.$prismic.client.getSingle("blog-home").then(document => {
+        if (document) {
+          this.documentId = document.id;
+          this.fields.headline = document.data.headline;
+          this.fields.description = document.data.description;
+          this.fields.image = document.data.image.url;
 
-            //Check that the blog home contains content
-            this.checkForContent();
-
-          } else {
-            //returns error page
-            this.$router.push({ name: 'not-found' })
-          }
-        })
+          //Check that the blog home contains content
+          this.checkForContent();
+        } else {
+          //returns error page
+          this.$router.push({ name: "not-found" });
+        }
+      });
     },
     //Function to check for any content on the blog home page
-    checkForContent(){
+    checkForContent() {
       if (
         this.fields.image != undefined ||
         this.$prismic.richTextAsPlain(this.fields.headline) !== "" ||
@@ -72,13 +67,13 @@ export default {
       ) {
         this.hasContent = true;
       }
-    },
+    }
   },
-  created () {
-    this.getContent()
+  created() {
+    this.getContent();
     window.prismic.setupEditButton();
   }
-}
+};
 </script>
 
 <style scoped>
@@ -97,12 +92,12 @@ export default {
 }
 .home .blog-description {
   font-size: 18px;
-  color: #9A9A9A;
+  color: #9a9a9a;
   line-height: 30px;
   margin-bottom: 3rem;
   padding-bottom: 3rem;
-  font-family: 'Lato', sans-serif;
-  border-bottom: 1px solid #DADADA;
+  font-family: "Lato", sans-serif;
+  border-bottom: 1px solid #dadada;
 }
 /* Media Queries */
 @media (max-width: 767px) {

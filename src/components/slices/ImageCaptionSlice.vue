@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="size === 'image-full-width'">
-      <div class='blog-header single' :style="{ 'background-image': 'url(' + img.url + ')'}">
+      <div class="blog-header single" :style="{ 'background-image': 'url(' + img.url + ')'}">
         <template v-if="$prismic.richTextAsPlain(caption) != ''">
           <div class="wrapper">
             <h1>{{ $prismic.richTextAsPlain(caption) }}</h1>
@@ -10,9 +10,9 @@
       </div>
     </template>
     <template v-else>
-      <div class='post-part single container'>
+      <div class="post-part single container">
         <p class="block-img" :class="size">
-          <prismic-image :field="img"/>
+          <prismic-image :field="img" />
         </p>
         <template v-if="$prismic.richTextAsPlain(caption) != ''">
           <p>
@@ -26,28 +26,28 @@
 
 <script>
 export default {
-  props: ['slice'],
-  name: 'image-caption-slice',
+  props: ["slice"],
+  name: "image-caption-slice",
   data: function() {
     return {
-      img: '',
-      caption: '',
-      size: '',
-    }
+      img: "",
+      caption: "",
+      size: ""
+    };
   },
-  created () {
-    this.img = this.slice.primary.image
-    this.caption = this.slice.primary.caption
-    this.size = this.slice.slice_label
+  created() {
+    this.img = this.slice.primary.image;
+    this.caption = this.slice.primary.caption;
+    this.size = this.slice.slice_label;
   }
-}
+};
 </script>
 
 <style scoped>
 .blog-header {
   height: 400px;
   position: relative;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   background-color: white;
   background-size: cover;
@@ -55,7 +55,7 @@ export default {
   margin-bottom: 3rem;
 }
 .blog-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -64,17 +64,52 @@ export default {
   background: rgba(0, 0, 0, 0.2);
 }
 .blog-header::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: -moz-linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0.2) 100%);
-  background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0.2) 100%);
-  background: -o-linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0.2) 100%);
-  background: -ms-linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0.2) 100%);
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.1) 90%, rgba(0, 0, 0, 0.2) 100%);
+  background: -moz-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(0, 0, 0, 0.05) 80%,
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background: -webkit-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(0, 0, 0, 0.05) 80%,
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background: -o-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(0, 0, 0, 0.05) 80%,
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background: -ms-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(0, 0, 0, 0.05) 80%,
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(0, 0, 0, 0.05) 80%,
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
 }
 .blog-header .wrapper {
   text-align: center;

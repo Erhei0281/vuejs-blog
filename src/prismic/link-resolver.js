@@ -8,11 +8,11 @@ export default function (doc) {
     return '/not-found'
   }
 
-  if (doc.type === 'blog_home') {
+  if (doc.type === 'blog-home') {
     return '/blog'
   }
 
-  if (doc.type === 'post') {
+  if (doc.type === 'blog-po') {
     return '/blog/' + doc.uid
   }
 
